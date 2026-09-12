@@ -1,0 +1,133 @@
+@import "tailwindcss";
+@import "tailwind-animations";
+
+@font-face {
+    font-family: 'Pacifico Regular';
+    src: url(/fonts/Pacifico-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url(/fonts/Montserrat.ttf);
+}
+
+:root {
+    /* FONTS */
+    --app-font-primary: 'Pacifico Regular', Arial;
+    --app-font-secondary: 'Montserrat', Arial;
+
+    /* COLORS */
+    --app-color-body: #ffffff;
+    --app-color-body-secondary: #ffecee;
+    --app-color-primary: #ee1e25;
+    --app-color-secondary: #000000;
+    --app-color-secondary-50: #00000080;
+
+    /* BUTTON */
+    --app-btn-bg: #ee1e25;
+    --app-btn-color: #ffffff;
+    --app-btn-bg-hover: #C3191F;
+    --app-btn-color-hover: #ffffff;
+    --app-btn-bg-active: #A1151A;
+    --app-btn-color-active: #ffffff;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+/* FONTS */
+.font-primary {
+    font-family: var(--app-font-primary);
+}
+
+.font-secondary {
+    font-family: var(--app-font-secondary);
+}
+
+/* COLORS */
+.bg-body {
+    background-color: var(--app-color-body);
+}
+
+.bg-body-secondary {
+    background-color: var(--app-color-body-secondary);
+}
+
+.text-primary {
+    color: var(--app-color-primary);
+}
+
+.text-secondary {
+    color: var(--app-color-secondary);
+}
+
+.text-secondary-50 {
+    color: var(--app-color-secondary-50);
+}
+
+/* COMPONENTS */
+.marquee-container {
+    --gap: 4rem;
+    gap: var(--gap);
+}
+
+.marquee-overlay {
+    background: linear-gradient(to right,
+            var(--app-color-body) 0%,
+            transparent 2.5%,
+            transparent 97.5%,
+            var(--app-color-body));
+}
+
+.marquee-track {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    gap: var(--gap);
+    animation: scroll 60s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+}
+/* PRODUCTOS */
+
+.products-grid {
+    overflow: hidden;
+}
+
+.products-carousel-track {
+    display: flex;
+    width: max-content;
+    animation: products-right 20s linear infinite;
+}
+
+.products-carousel-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes products-right {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
