@@ -71,40 +71,14 @@ body {
 }
 
 /* COMPONENTS */
-.marquee-container {
-    --gap: 4rem;
-    gap: var(--gap);
-}
-
 .marquee-overlay {
-    background: linear-gradient(to right,
-            var(--app-color-body) 0%,
-            transparent 2.5%,
-            transparent 97.5%,
-            var(--app-color-body));
-}
-
-.marquee-track {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: space-around;
-    min-width: 100%;
-    gap: var(--gap);
-    animation: scroll 60s linear infinite;
-}
-
-.marquee-container:hover .marquee-track {
-    animation-play-state: paused;
-}
-
-@keyframes scroll {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(calc(-100% - var(--gap)));
-    }
+    background: linear-gradient(
+        to right,
+        var(--app-color-body) 0%,
+        transparent 8%,
+        transparent 92%,
+        var(--app-color-body) 100%
+    );
 }
 /* PRODUCTOS */
 
