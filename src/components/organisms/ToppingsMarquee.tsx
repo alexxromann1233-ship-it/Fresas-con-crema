@@ -72,18 +72,20 @@ export function ToppingsMarquee() {
   };
 
   const handlePointerDown = (
-    event: React.PointerEvent<HTMLDivElement>
-  ) => {
-    startX.current = event.clientX;
-    lastX.current = event.clientX;
-    lastTime.current = performance.now();
+  event: React.PointerEvent<HTMLDivElement>
+) => {
+  startX.current = event.clientX;
+  lastX.current = event.clientX;
+  lastTime.current = performance.now();
 
-    hasMoved.current = false;
-    isDragging.current = false;
-    isInertia.current = false;
+  hasMoved.current = false;
+  isDragging.current = false;
+  isInertia.current = false;
 
-    velocity.current = 0;
-  };
+  velocity.current = 0;
+
+  event.currentTarget.setPointerCapture(event.pointerId);
+};
 
   const handlePointerMove = (
     event: React.PointerEvent<HTMLDivElement>
@@ -92,15 +94,14 @@ export function ToppingsMarquee() {
     const movement = currentX - startX.current;
 
     if (!isDragging.current) {
-      if (Math.abs(movement) < DRAG_THRESHOLD) {
-        return;
-      }
-
-      isDragging.current = true;
-      hasMoved.current = true;
-
-      event.currentTarget.setPointerCapture(event.pointerId);
+     if (Math.abs(movement) < DRAG_THRESHOLD) {
+      return;
+    
     }
+
+    isDragging.current = true;
+    hasMoved.current = true;
+   }
 
     const now = performance.now();
     const deltaX = currentX - lastX.current;
@@ -199,7 +200,7 @@ export function ToppingsMarquee() {
       onPointerCancel={handlePointerCancel}
       onLostPointerCapture={handleLostPointerCapture}
     >
-      <div className='marquee-overlay absolute inset-0 z-10 pointer-events-none' />
+      
 
       <motion.div
         ref={trackRef}

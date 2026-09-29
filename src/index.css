@@ -71,15 +71,7 @@ body {
 }
 
 /* COMPONENTS */
-.marquee-overlay {
-    background: linear-gradient(
-        to right,
-        var(--app-color-body) 0%,
-        transparent 8%,
-        transparent 92%,
-        var(--app-color-body) 100%
-    );
-}
+
 /* PRODUCTOS */
 
 .products-grid {
