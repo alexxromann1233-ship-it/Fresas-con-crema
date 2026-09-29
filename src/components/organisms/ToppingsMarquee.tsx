@@ -107,7 +107,7 @@ export function ToppingsMarquee() {
     const deltaTime = now - lastTime.current;
 
     if (deltaTime > 0) {
-      velocity.current = deltaX / deltaTime * 16;
+      velocity.current = (deltaX / deltaTime) * 16;
     }
 
     x.set(
@@ -120,19 +120,41 @@ export function ToppingsMarquee() {
     lastTime.current = now;
   };
 
-  const handlePointerUp = (
-    event: React.PointerEvent<HTMLDivElement>
+  const stopDragging = (
+    event?: React.PointerEvent<HTMLDivElement>
   ) => {
     if (!isDragging.current) {
       return;
     }
 
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+    if (
+      event &&
+      event.currentTarget.hasPointerCapture(event.pointerId)
+    ) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
 
     isDragging.current = false;
     isInertia.current = true;
+  };
+
+  const handlePointerUp = (
+    event: React.PointerEvent<HTMLDivElement>
+  ) => {
+    stopDragging(event);
+  };
+
+  const handlePointerCancel = (
+    event: React.PointerEvent<HTMLDivElement>
+  ) => {
+    stopDragging(event);
+  };
+
+  const handleLostPointerCapture = () => {
+    if (isDragging.current) {
+      isDragging.current = false;
+      isInertia.current = true;
+    }
   };
 
   useEffect(() => {
@@ -164,19 +186,21 @@ export function ToppingsMarquee() {
   }, []);
 
   return (
-   <div
-  className='marquee-container relative flex w-full overflow-hidden mb-14'
-  style={{
-    touchAction: 'pan-y',
-    userSelect: 'none',
-    cursor: 'grab',
-  }}
+    <div
+      className='marquee-container relative flex w-full overflow-hidden mb-14'
+      style={{
+        touchAction: 'pan-y',
+        userSelect: 'none',
+        cursor: 'grab',
+      }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
+      onLostPointerCapture={handleLostPointerCapture}
     >
       <div className='marquee-overlay absolute inset-0 z-10 pointer-events-none' />
+
       <motion.div
         ref={trackRef}
         style={{ x }}
