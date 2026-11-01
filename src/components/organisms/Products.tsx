@@ -1,5 +1,5 @@
-import { ToppingsMarquee } from '../organisms/ToppingsMarquee';
-import { ProductsMarquee } from '../organisms/ProductsMarquee';
+import { PRODUCTS, TOPPINGS } from '../../constants/data';
+import { Marquee } from '../organisms/Marquee';
 
 /**
  * Listado de productos y toppings
@@ -23,13 +23,25 @@ export function Products() {
           Productos
         </h2>
 
-        <ProductsMarquee />
+        <Marquee
+          items={PRODUCTS}
+          direction={1}
+          itemWidth='w-44 md:w-52'
+          className='mb-20 md:mb-28'
+          trackClassName='gap-8 md:gap-10 pe-8 md:pe-10'
+        />
 
         <h2 className='text-center text-primary text-4xl md:text-5xl font-primary mb-8 md:mb-10'>
           Toppings
         </h2>
 
-        <ToppingsMarquee />
+        <Marquee
+          items={TOPPINGS}
+          direction={-1}
+          itemWidth='w-32 md:w-44'
+          className='mb-14'
+          trackClassName='gap-10 md:gap-16 pe-10 md:pe-16'
+        />
 
       </div>
     </section>
