@@ -10,15 +10,6 @@ export const NAV = [
 ] as const;
 
 /**
- * Indicadores
- */
-export const KPI = [
-  { name: 'Fresco', value: '100%' },
-  { name: 'Toppings', value: '12+' },
-  { name: 'Tamaños', value: '3' },
-] as const;
-
-/**
  * Productos
  */
 export const PRODUCTS: Item[] = [
@@ -135,5 +126,19 @@ export const TOPPINGS: Item[] = [
     'images/toppings/chocolate.blanco.webp',
     name: 'Chocolate Blanco',
     price: 3000,
+  },
+] as const;
+
+/**
+ * Indicadores (derivados del catálogo para que no se desactualicen)
+ */
+export const KPI = [
+  { id: 'fresh', name: 'Fruta fresca', value: 100, suffix: '%' },
+  { id: 'products', name: 'Productos', value: PRODUCTS.length },
+  { id: 'toppings', name: 'Toppings', value: TOPPINGS.length },
+  {
+    id: 'sizes',
+    name: 'Tamaños',
+    value: new Set(PRODUCTS.map((item) => item.description)).size,
   },
 ] as const;
