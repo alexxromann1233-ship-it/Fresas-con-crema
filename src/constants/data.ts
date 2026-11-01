@@ -16,7 +16,7 @@ export const PRODUCTS: Item[] = [
   {
     id: 3,
     thumbnail:
-      'https://images.rappi.com/products/1704407546970_1704407541485_1704407542703.jpeg',
+      'images/productos/fresas.webp',
     name: 'Fresas 1',
     description: '14oz',
     price: 15000,
@@ -24,7 +24,7 @@ export const PRODUCTS: Item[] = [
   {
     id: 2,
     thumbnail:
-      'https://images.rappi.com/products/1704407546970_1704407541485_1704407542703.jpeg',
+      'images/productos/fresas.webp',
     name: 'Fresas 2',
     description: '16oz',
     price: 20000,
@@ -32,7 +32,7 @@ export const PRODUCTS: Item[] = [
   {
     id: 1,
     thumbnail:
-      'https://images.rappi.com/products/1704407546970_1704407541485_1704407542703.jpeg',
+      'images/productos/fresas.webp',
     name: 'Fresas 3',
     description: '22oz',
     price: 25000,
@@ -72,7 +72,7 @@ export const TOPPINGS: Item[] = [
   {
     id: 6,
     thumbnail:
-      'https://llenatudespensa.com/barquillos-cortos-bicolor-cacao_Id-14614.jpg',
+      'images/toppings/barquillos.webp',
     name: 'Barquillos',
     price: 1000,
   },

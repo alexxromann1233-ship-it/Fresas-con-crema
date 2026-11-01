@@ -8,7 +8,7 @@ export const CONFIG = {
   APP_NAME: 'Fresas con Crema',
   DESCRIPTION:
     'Las mejores fresas con crema y ensaladas de frutas de Cartago. Frescura y calidad en cada bocado, con toppings irresistibles',
-  SRC_MAIN_IMG: 'https://belnus.com/img/Fresas.png',
+  SRC_MAIN_IMG: '/images/hero-fresas.webp',
   INSTAGRAM_URL: 'https://instagram.com',
   FACEBOOK_URL: 'https://facebook.com',
   DELIVERY_FEE: 3000,
