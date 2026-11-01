@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { useMotionValue } from 'framer-motion';
 
 // Sin desplazamiento automático si el usuario prefiere menos movimiento
 const AUTO_SPEED = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -30,11 +29,13 @@ interface Sample {
  * Hook para carruseles infinitos con desplazamiento automático,
  * arrastre e inercia. La pista debe contener los elementos duplicados.
  *
+ * La posición se escribe directamente en el transform de la pista dentro del
+ * mismo frame (sin pasar por React ni por un MotionValue) para que el
+ * movimiento vaya sincronizado con el refresco de la pantalla.
+ *
  * @param direction 1 hacia la derecha, -1 hacia la izquierda
  */
 export const useMarquee = (direction: 1 | -1 = 1) => {
-  const x = useMotionValue(0);
-
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -45,6 +46,7 @@ export const useMarquee = (direction: 1 | -1 = 1) => {
     if (!container || !track) return;
 
     let trackWidth = 0;
+    let position = 0;
     let velocity = direction * AUTO_SPEED; // px/s
     let currentDirection: number = direction;
 
@@ -65,8 +67,14 @@ export const useMarquee = (direction: 1 | -1 = 1) => {
       return ((value % trackWidth) - trackWidth) % trackWidth;
     };
 
+    const moveTo = (value: number) => {
+      position = wrap(value);
+      track.style.transform = `translate3d(${position}px, 0, 0)`;
+    };
+
     const tick = (time: number) => {
-      const delta = Math.min(time - lastFrame, MAX_FRAME_MS);
+      // El primer frame puede llegar con una marca anterior a performance.now()
+      const delta = Math.max(0, Math.min(time - lastFrame, MAX_FRAME_MS));
       lastFrame = time;
 
       // Mientras se mantiene presionado, la cinta queda "agarrada"
@@ -77,7 +85,7 @@ export const useMarquee = (direction: 1 | -1 = 1) => {
 
         velocity = target + (velocity - target) * decay;
 
-        x.set(wrap(x.get() + velocity * (delta / 1000)));
+        moveTo(position + velocity * (delta / 1000));
       }
 
       animationFrame = requestAnimationFrame(tick);
@@ -151,7 +159,7 @@ export const useMarquee = (direction: 1 | -1 = 1) => {
         container.setPointerCapture(event.pointerId);
       }
 
-      x.set(wrap(x.get() + event.clientX - lastX));
+      moveTo(position + event.clientX - lastX);
       lastX = event.clientX;
 
       samples.push({ x: event.clientX, time: event.timeStamp });
@@ -179,39 +187,9 @@ export const useMarquee = (direction: 1 | -1 = 1) => {
       event.stopPropagation();
     };
 
-    // En táctil el navegador cancela el puntero si empieza a hacer scroll
-    // vertical. Se decide el eje en los primeros píxeles: si es horizontal se
-    // bloquea el scroll nativo y el arrastre ya no se interrumpe.
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchAxis: 'x' | 'y' | null = null;
-
-    const handleTouchStart = (event: TouchEvent) => {
-      const touch = event.touches[0];
-
-      touchStartX = touch.clientX;
-      touchStartY = touch.clientY;
-      touchAxis = null;
-    };
-
-    const handleTouchMove = (event: TouchEvent) => {
-      const touch = event.touches[0];
-
-      if (touchAxis === null) {
-        const dx = Math.abs(touch.clientX - touchStartX);
-        const dy = Math.abs(touch.clientY - touchStartY);
-
-        if (Math.max(dx, dy) < 3) return;
-
-        touchAxis = dx > dy ? 'x' : 'y';
-      }
-
-      if (touchAxis === 'x' && event.cancelable) event.preventDefault();
-    };
-
     const measure = () => {
       trackWidth = track.offsetWidth / 2;
-      x.set(wrap(x.get()));
+      moveTo(position);
     };
 
     // Solo anima mientras el carrusel está en pantalla
@@ -232,8 +210,6 @@ export const useMarquee = (direction: 1 | -1 = 1) => {
     container.addEventListener('pointercancel', handlePointerEnd);
     container.addEventListener('lostpointercapture', handleLostPointerCapture);
     container.addEventListener('click', handleClick, true);
-    container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    container.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
       stop();
@@ -246,10 +222,8 @@ export const useMarquee = (direction: 1 | -1 = 1) => {
       container.removeEventListener('pointercancel', handlePointerEnd);
       container.removeEventListener('lostpointercapture', handleLostPointerCapture);
       container.removeEventListener('click', handleClick, true);
-      container.removeEventListener('touchstart', handleTouchStart);
-      container.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [direction, x]);
+  }, [direction]);
 
-  return { x, containerRef, trackRef };
+  return { containerRef, trackRef };
 };

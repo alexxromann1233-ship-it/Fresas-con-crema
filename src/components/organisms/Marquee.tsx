@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import type { Item } from '../../constants/types';
 import { useMarquee } from '../../hooks/useMarquee';
@@ -22,20 +21,20 @@ export function Marquee({
   className,
   trackClassName,
 }: Readonly<MarqueeProps>) {
-  const { x, containerRef, trackRef } = useMarquee(direction);
+  const { containerRef, trackRef } = useMarquee(direction);
 
   return (
     <div
       ref={containerRef}
       className={clsx(
-        'marquee-fade relative flex w-full overflow-hidden py-3 cursor-grab active:cursor-grabbing select-none',
+        'marquee-fade relative flex w-full overflow-hidden touch-pan-y py-6 cursor-grab active:cursor-grabbing select-none',
         className
       )}
     >
-      <motion.div
+      {/* Capa propia en la GPU: moverla no obliga a repintar las tarjetas */}
+      <div
         ref={trackRef}
-        style={{ x }}
-        className={clsx('flex shrink-0 items-stretch', trackClassName)}
+        className={clsx('flex shrink-0 items-stretch will-change-transform', trackClassName)}
       >
         {[...items, ...items].map((item, i) => (
           <ProductItem
@@ -44,7 +43,7 @@ export function Marquee({
             item={item}
           />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
