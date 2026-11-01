@@ -21,30 +21,31 @@ export function ProductItem({
   const quantity = cart.find((i) => i.id === item.id)?.quantity;
 
   return (
-    <article className='flex flex-col items-center'>
-      <div className={width}>
-        <img
-          className='aspect-square rounded-2xl object-contain mb-2'
-          src={item.thumbnail}
-          alt={`Thumbnail de ${item.name}`}
-        />
-      </div>
-      <span className='text-secondary font-secondary font-semibold'>
+    <article className={`${width} shrink-0 flex flex-col items-center text-center`}>
+      <img
+        className='w-full aspect-square rounded-2xl object-contain select-none pointer-events-none mb-3'
+        src={item.thumbnail}
+        alt={item.name}
+        loading='lazy'
+        decoding='async'
+        draggable={false}
+      />
+      <span className='w-full text-secondary font-secondary font-semibold leading-snug line-clamp-2'>
         {item.name}
       </span>
       {item.description && (
-        <span className='text-center text-secondary font-secondary leading-7'>
+        <span className='text-secondary-50 font-secondary text-sm leading-6'>
           {item.description}
         </span>
       )}
-      <span className='text-primary text-3xl font-primary mb-3.5'>
+      <span className='text-primary text-3xl font-primary mt-1 mb-4'>
         {formatMoney(item.price)}
       </span>
-      <div className='relative w-full'>
+      <div className='relative w-full mt-auto'>
         <AnimatePresence>
           {quantity && (
             <motion.div
-              className='absolute top-[2%] start-[98%] translate-[-50%]'
+              className='absolute z-1 top-[2%] start-[98%] translate-[-50%]'
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
@@ -56,7 +57,11 @@ export function ProductItem({
             </motion.div>
           )}
         </AnimatePresence>
-        <Button className='w-full' onClick={() => handleAddProduct(item)}>
+        <Button
+          className='w-full'
+          aria-label={`Agregar ${item.name}`}
+          onClick={() => handleAddProduct(item)}
+        >
           Agregar
         </Button>
       </div>

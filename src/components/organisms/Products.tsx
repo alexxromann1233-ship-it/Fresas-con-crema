@@ -17,15 +17,15 @@ export function Products() {
         }}
       />
 
-      <div className='relative w-full md:w-3/4 h-full flex flex-col py-18 px-6 md:px-0 mx-auto'>
+      <div className='relative w-full md:w-3/4 h-full flex flex-col pt-16 md:pt-20 pb-32 px-6 md:px-0 mx-auto'>
 
-        <h2 className='text-center text-primary text-4xl font-primary mb-7'>
+        <h2 className='text-center text-primary text-4xl md:text-5xl font-primary mb-8 md:mb-10'>
           Productos
         </h2>
 
         <ProductsMarquee />
 
-        <h2 className='text-center text-primary text-4xl font-primary mb-7'>
+        <h2 className='text-center text-primary text-4xl md:text-5xl font-primary mb-8 md:mb-10'>
           Toppings
         </h2>
 

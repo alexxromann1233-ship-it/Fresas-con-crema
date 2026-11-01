@@ -32,7 +32,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
   (props, ref) => {
     const { variant = 'primary', padding, children } = props;
     const className = clsx(
-      'border-2 rounded-full font-secondary text-center font-semibold cursor-pointer transition-colors duration-300',
+      'inline-flex items-center justify-center gap-2 border-2 rounded-full font-secondary text-center font-semibold cursor-pointer select-none transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none',
       padding || 'py-3 px-6',
       variant === 'primary' &&
         'bg-(--app-btn-bg) hover:bg-(--app-btn-bg-hover) active:bg-(--app-btn-bg-active) border-(--app-btn-bg) hover:border-(--app-btn-bg-hover) active:border-(--app-btn-bg-active) text-(--app-btn-color) hover:text-(--app-btn-color-hover) active:text-(--app-btn-color-active)',

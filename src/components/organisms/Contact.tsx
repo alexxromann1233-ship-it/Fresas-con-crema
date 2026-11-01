@@ -11,7 +11,10 @@ export function Contact() {
   const handleOrder = useWhatsAppOrder();
 
   return (
-    <section id='contacto' className='relative min-h-screen bg-body-secondary'>
+    <section
+      id='contacto'
+      className='relative min-h-screen flex flex-col bg-body-secondary'
+    >
       <div
         className='absolute bottom-0 w-full h-64 bg-body'
         style={{
@@ -21,15 +24,15 @@ export function Contact() {
           maskSize: 'cover',
         }}
       />
-      <div className='relative w-full md:w-3/4 h-full flex flex-col justify-center px-6 md:px-0 mx-auto'>
-        <h2 className='text-center text-primary text-4xl font-primary mb-4'>
+      <div className='relative flex-1 w-full md:w-3/4 flex flex-col justify-center pt-24 pb-56 md:pb-48 px-6 md:px-0 mx-auto'>
+        <h2 className='text-center text-primary text-4xl md:text-5xl font-primary leading-tight mb-4'>
           ¿Listo para tu Pedido?
         </h2>
-        <p className='text-center text-secondary font-secondary leading-7 mb-6'>
+        <p className='max-w-lg text-center text-secondary font-secondary md:text-lg leading-7 md:leading-8 mx-auto mb-8'>
           Contáctanos por WhatsApp y disfruta de las mejores fresas con crema de
           Cartago
         </p>
-        <div className='w-full md:w-1/3 flex flex-col gap-4 mx-auto'>
+        <div className='w-full max-w-sm flex flex-col gap-4 mx-auto'>
           <Button variant='whatsapp' onClick={handleOrder}>Pedir por WhatsApp</Button>
           <Button variant='secondary' onClick={handleToggleCart}>Ver Carrito ({cart.length})</Button>
         </div>

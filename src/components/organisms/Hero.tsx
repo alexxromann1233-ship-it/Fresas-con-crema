@@ -7,7 +7,10 @@ import { Button } from '../atoms/Button';
  */
 export function Hero() {
   return (
-    <section id='inicio' className='relative min-h-screen bg-body-secondary'>
+    <section
+      id='inicio'
+      className='relative min-h-screen flex flex-col bg-body-secondary'
+    >
       <div
         className='absolute bottom-0 w-full h-70 bg-body'
         style={{
@@ -17,13 +20,13 @@ export function Hero() {
           maskSize: 'cover',
         }}
       />
-      <div className='relative w-full md:w-3/4 h-full flex flex-col gap-8 py-14 px-6 md:px-0 mx-auto'>
-        <div className='w-full h-full flex flex-col-reverse md:flex-row justify-center md:items-center'>
+      <div className='relative flex-1 w-full md:w-3/4 flex flex-col gap-10 md:gap-8 pt-24 md:pt-28 pb-16 md:pb-14 px-6 md:px-0 mx-auto'>
+        <div className='w-full flex-1 flex flex-col-reverse md:flex-row justify-center md:items-center gap-6 md:gap-10'>
           <div className='w-full flex flex-col animate-fade-in-up'>
-            <h1 className='text-primary font-primary text-6xl mb-3'>
+            <h1 className='text-primary font-primary text-5xl md:text-6xl lg:text-7xl leading-tight mb-4'>
               {CONFIG.APP_NAME}
             </h1>
-            <p className='text-secondary font-secondary leading-7 mb-7'>
+            <p className='max-w-xl text-secondary font-secondary text-base md:text-lg leading-7 md:leading-8 mb-8'>
               {CONFIG.DESCRIPTION}
             </p>
             <div className='flex flex-col md:flex-row gap-4'>
@@ -37,19 +40,23 @@ export function Hero() {
           </div>
           <div className='w-full h-[28dvh] md:h-[70dvh] flex justify-center md:justify-end animate-fade-in-up animate-delay-200'>
             <img
-              className='w-auto h-full'
+              className='w-auto h-full object-contain drop-shadow-xl'
               src={CONFIG.SRC_MAIN_IMG}
-              alt='Imagen hola'
+              alt={`Vaso de ${CONFIG.APP_NAME.toLowerCase()}`}
+              fetchPriority='high'
+              draggable={false}
             />
           </div>
         </div>
         <ul className='flex justify-between animate-fade-in-up animate-delay-400'>
           {KPI.map((item, i) => (
             <li key={i} className='flex flex-col items-center'>
-              <span className='text-primary text-4xl font-primary mb-1'>
+              <span className='text-primary text-3xl md:text-4xl font-primary mb-1'>
                 {item.value}
               </span>
-              <span className='text-secondary font-secondary'>{item.name}</span>
+              <span className='text-secondary font-secondary text-sm md:text-base font-medium'>
+                {item.name}
+              </span>
             </li>
           ))}
         </ul>

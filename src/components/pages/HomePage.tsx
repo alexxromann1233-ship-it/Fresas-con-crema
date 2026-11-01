@@ -11,7 +11,7 @@ import { Cart } from '../organisms/Cart';
  */
 export default function HomePage() {
   return (
-    <div className='h-screen flex flex-col'>
+    <div className='min-h-screen flex flex-col'>
       <Header />
       <main className='flex-1 flex flex-col'>
         <Hero />

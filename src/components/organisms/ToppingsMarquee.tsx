@@ -3,6 +3,11 @@ import { motion, useMotionValue } from 'framer-motion';
 import { TOPPINGS } from '../../constants/data';
 import { ProductItem } from '../molecules/ProductItem';
 
+// Sin desplazamiento automático si el usuario prefiere menos movimiento
+const AUTO_SPEED = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ? 0
+  : 0.45;
+
 export function ToppingsMarquee() {
   const x = useMotionValue(0);
 
@@ -22,7 +27,6 @@ export function ToppingsMarquee() {
 
   const trackWidth = useRef(0);
 
-  const AUTO_SPEED = 0.45;
   const FRICTION = 0.96;
   const DRAG_THRESHOLD = 6;
 
@@ -188,11 +192,10 @@ export function ToppingsMarquee() {
 
   return (
     <div
-      className='marquee-container relative flex w-full overflow-hidden mb-14'
+      className='marquee-container marquee-fade relative flex w-full overflow-hidden py-3 mb-14 cursor-grab active:cursor-grabbing'
       style={{
         touchAction: 'pan-y',
         userSelect: 'none',
-        cursor: 'grab',
       }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -205,7 +208,7 @@ export function ToppingsMarquee() {
       <motion.div
         ref={trackRef}
         style={{ x }}
-        className='flex shrink-0 gap-16'
+        className='flex shrink-0 items-stretch gap-10 md:gap-16 pe-10 md:pe-16'
       >
         {TOPPINGS.map((topping, i) => (
           <ProductItem
