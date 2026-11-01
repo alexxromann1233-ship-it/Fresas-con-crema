@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 
 /**
- * Hook para paneles laterales: bloquea el scroll del body y cierra con Escape
+ * Hook para paneles laterales: bloquea el scroll del body, cierra con Escape
+ * y devuelve el foco al elemento que abrió el panel
  */
 export const usePanel = (show: boolean, onClose: () => void) => {
   useEffect(() => {
@@ -11,6 +12,7 @@ export const usePanel = (show: boolean, onClose: () => void) => {
       if (event.key === 'Escape') onClose();
     };
 
+    const opener = document.activeElement as HTMLElement | null;
     const overflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', handleKeyDown);
@@ -18,6 +20,7 @@ export const usePanel = (show: boolean, onClose: () => void) => {
     return () => {
       document.body.style.overflow = overflow;
       document.removeEventListener('keydown', handleKeyDown);
+      opener?.focus({ preventScroll: true });
     };
   }, [show, onClose]);
 };

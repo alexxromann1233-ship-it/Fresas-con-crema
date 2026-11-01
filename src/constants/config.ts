@@ -11,6 +11,7 @@ export const CONFIG = {
   SRC_MAIN_IMG: 'https://belnus.com/img/Fresas.png',
   INSTAGRAM_URL: 'https://instagram.com',
   FACEBOOK_URL: 'https://facebook.com',
+  DELIVERY_FEE: 3000,
   ADDRESS: 'Cartago Valle, Colombia',
   PHONE: '573112255392',
   SCHEDULE: 'Dias 15 y 30 de cada mes -Solo por encargo, haz tu pedido con anticipación',

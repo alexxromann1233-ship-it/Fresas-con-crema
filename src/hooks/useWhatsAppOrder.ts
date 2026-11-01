@@ -16,12 +16,15 @@ export function useWhatsAppOrder() {
     let message: string = '';
 
     if (cart.length > 0) {
-      const grandTotal = cart.reduce((acc, item) => acc + item.total, 0);
+      const grandTotal =
+        cart.reduce((acc, item) => acc + item.total, 0) + CONFIG.DELIVERY_FEE;
       message += 'Hola, me gustaría adquirir estos productos:\n\n';
       cart.forEach((item) => {
         message += `✅ *${item.name}*\n`;
         message += `Cant: ${item.quantity} | Subtotal: ${formatMoney(item.total)}\n\n`;
       });
+      message += `🛵 Domicilio (base): ${formatMoney(CONFIG.DELIVERY_FEE)}\n`;
+      message += '(el valor puede variar según la distancia)\n\n';
       message += `*TOTAL A PAGAR: ${formatMoney(grandTotal)}*\n`;
     } else {
       message =
