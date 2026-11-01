@@ -35,12 +35,12 @@
     --app-btn-color-active: #ffffff;
 
     /* LAYOUT */
-    --app-header-height: 5rem;
+    --app-header-height: 4rem;
 }
 
 @media (min-width: 48rem) {
     :root {
-        --app-header-height: 6rem;
+        --app-header-height: 4.5rem;
     }
 }
 
