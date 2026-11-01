@@ -1,123 +1,247 @@
+import type { ReactNode } from 'react';
 import { CONFIG } from '../../constants/config';
 import { NAV } from '../../constants/data';
 import { formatPhone } from '../../utils/formats';
 import { Button } from '../atoms/Button';
 
+const NETWORKS = [
+  {
+    name: 'Instagram',
+    href: CONFIG.INSTAGRAM_URL,
+    icon: (
+      <>
+        <rect width='20' height='20' x='2' y='2' rx='5' ry='5' />
+        <path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z' />
+        <path d='M17.5 6.5h.01' />
+      </>
+    ),
+  },
+  {
+    name: 'Facebook',
+    href: CONFIG.FACEBOOK_URL,
+    icon: (
+      <path d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z' />
+    ),
+  },
+  {
+    name: 'WhatsApp',
+    href: `https://wa.me/${CONFIG.PHONE}`,
+    icon: <path d='M7.9 20A9 9 0 1 0 4 16.1L2 22Z' />,
+  },
+];
+
+const CONTACTS: { label: string; text: string; href?: string; icon: ReactNode }[] = [
+  {
+    label: 'Ubicación',
+    text: CONFIG.ADDRESS,
+    icon: (
+      <>
+        <path d='M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0' />
+        <circle cx='12' cy='10' r='3' />
+      </>
+    ),
+  },
+  {
+    label: 'WhatsApp',
+    text: formatPhone(CONFIG.PHONE),
+    href: `https://wa.me/${CONFIG.PHONE}`,
+    icon: (
+      <path d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' />
+    ),
+  },
+  {
+    label: 'Horario',
+    text: CONFIG.SCHEDULE,
+    icon: (
+      <>
+        <path d='M8 2v4' />
+        <path d='M16 2v4' />
+        <rect width='18' height='18' x='3' y='4' rx='2' />
+        <path d='M3 10h18' />
+        <path d='M8 14h.01' />
+        <path d='M12 14h.01' />
+        <path d='M16 14h.01' />
+      </>
+    ),
+  },
+];
+
+/**
+ * Icono de trazo (misma familia que la cabecera y el menú móvil)
+ */
+function Icon({ size = 20, children }: Readonly<{ size?: number; children: ReactNode }>) {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width={size}
+      height={size}
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      viewBox='0 0 24 24'
+      aria-hidden='true'
+    >
+      {children}
+    </svg>
+  );
+}
+
+/**
+ * Título de columna
+ */
+function FooterTitle({ children }: Readonly<{ children: ReactNode }>) {
+  return (
+    <h3 className='text-secondary-50 font-secondary text-xs font-bold uppercase tracking-[0.18em] mb-5'>
+      {children}
+    </h3>
+  );
+}
+
 /**
  * Pie de página
  */
 export function Footer() {
-  const networks = [
-    {
-      name: 'Instagram',
-      href: CONFIG.INSTAGRAM_URL,
-      icon: "<path d='M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334' />",
-    },
-    {
-      name: 'Facebook',
-      href: CONFIG.FACEBOOK_URL,
-      icon: "<path d='M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951' />",
-    },
-  ];
-  const contacts = [
-    {
-      icon: "<path d='M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6'/>",
-      text: CONFIG.ADDRESS,
-    },
-    {
-      icon: "<path fill-rule='evenodd' d='M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z'/>",
-      text: formatPhone(CONFIG.PHONE),
-    },
-    {
-      icon: "<path d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z'/>",
-      text: CONFIG.SCHEDULE,
-    },
-  ];
-
   return (
-    <footer>
-      <div className='w-full md:w-3/4 flex flex-col md:flex-row justify-between gap-10 md:gap-14 py-10 px-6 md:px-0 mx-auto'>
-        <div>
-          <h3 className='text-primary text-2xl font-primary mb-5'>
-            {CONFIG.APP_NAME}
-          </h3>
-          <div className='flex gap-3.5'>
-            {networks.map((item, i) => (
-              <Button
-                key={i}
-                as='a'
-                href={item.href}
-                target='_blank'
-                rel='noopener noreferrer'
-                aria-label={item.name}
-                padding='p-3'
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  fill='currentColor'
-                  viewBox='0 0 16 16'
-                  aria-hidden='true'
-                  dangerouslySetInnerHTML={{ __html: item.icon }}
-                />
-              </Button>
-            ))}
-          </div>
-        </div>
-        <div className='md:max-w-xs'>
-          <h3 className='text-primary text-2xl font-primary mb-5'>Contacto</h3>
-          <ul className='flex flex-col gap-3'>
-            {contacts.map((item, i) => (
-              <li key={i} className='flex items-start gap-3'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  fill='currentColor'
-                  className='text-primary shrink-0 mt-1'
-                  viewBox='0 0 16 16'
-                  aria-hidden='true'
-                  dangerouslySetInnerHTML={{ __html: item.icon }}
-                />
-                <span className='text-secondary font-secondary leading-6'>
-                  {item.text}
-                </span>
+    <footer className='bg-body'>
+      <div className='w-full md:w-3/4 grid gap-12 md:gap-10 md:grid-cols-[1.3fr_1.4fr_0.8fr] pt-6 pb-12 md:pb-16 px-6 md:px-0 mx-auto'>
+        <div className='flex flex-col items-start'>
+          <a
+            href='#inicio'
+            className='group flex items-center gap-3 rounded-2xl mb-4'
+            aria-label={`${CONFIG.APP_NAME} - Inicio`}
+          >
+            <img
+              className='size-14 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-6'
+              src={CONFIG.SRC_LOGO}
+              srcSet={CONFIG.SRCSET_LOGO}
+              sizes='56px'
+              width={56}
+              height={56}
+              loading='lazy'
+              decoding='async'
+              alt=''
+            />
+            <span className='text-primary font-primary text-2xl leading-tight'>
+              {CONFIG.APP_NAME}
+            </span>
+          </a>
+          <p className='max-w-xs text-secondary-50 font-secondary text-sm leading-6 mb-6'>
+            {CONFIG.DESCRIPTION}
+          </p>
+          <ul className='flex gap-3'>
+            {NETWORKS.map((item) => (
+              <li key={item.name}>
+                <a
+                  href={item.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label={item.name}
+                  title={item.name}
+                  className='size-11 flex items-center justify-center rounded-xl bg-body-secondary text-primary transition-[color,background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-(--app-color-primary) hover:text-white hover:shadow-md hover:shadow-(--app-color-primary)/25 active:scale-95'
+                >
+                  <Icon>{item.icon}</Icon>
+                </a>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className='text-primary text-2xl font-primary mb-5'>Enlaces</h3>
-          <nav className='flex flex-col items-start gap-3'>
-            {NAV.map((link, i) => (
-              <a
-                key={i}
-                href={link.href}
-                className='text-primary font-secondary font-semibold transition-opacity duration-300 hover:opacity-70'
-              >
-                {link.text}
-              </a>
-            ))}
-          </nav>
+          <FooterTitle>Contacto</FooterTitle>
+          <ul className='flex flex-col gap-4'>
+            {CONTACTS.map((item) => {
+              const content = (
+                <>
+                  <span className='size-10 shrink-0 flex items-center justify-center rounded-xl bg-body-secondary text-primary transition-colors duration-300 group-hover:bg-(--app-color-primary) group-hover:text-white'>
+                    <Icon size={18}>{item.icon}</Icon>
+                  </span>
+                  <span className='min-w-0 flex flex-col'>
+                    <span className='text-secondary-50 font-secondary text-xs font-semibold'>
+                      {item.label}
+                    </span>
+                    <span className='text-secondary font-secondary text-sm font-medium leading-6'>
+                      {item.text}
+                    </span>
+                  </span>
+                </>
+              );
+
+              return (
+                <li key={item.label}>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='group flex items-start gap-3 rounded-xl'
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div className='flex items-start gap-3'>{content}</div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
+        <nav aria-label='Enlaces del pie de página'>
+          <FooterTitle>Enlaces</FooterTitle>
+          <ul className='flex flex-col gap-1'>
+            {NAV.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className='group -ms-3 inline-flex items-center gap-1.5 rounded-full py-2 px-3 text-secondary font-secondary font-semibold transition-colors duration-300 hover:text-primary hover:bg-(--app-color-primary)/5'
+                >
+                  {link.text}
+                  <span className='opacity-0 -translate-x-1 transition-[opacity,transform] duration-300 group-hover:opacity-100 group-hover:translate-x-0'>
+                    <Icon size={16}>
+                      <path d='m9 18 6-6-6-6' />
+                    </Icon>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <hr className='border-black/10' />
-      <div className='flex flex-col items-center gap-1.5 py-6 px-6 md:px-0'>
-        <span className='text-center text-secondary-50 font-secondary text-sm'>
-          &copy; 2026 {CONFIG.APP_NAME}. Todos los derechos reservados.
-        </span>
-        <span className='text-center text-secondary-50 font-secondary text-sm'>
-          Página desarrollada por{' '}
-          <a
-            href='https://johnfreddyrivera.netlify.app'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='text-primary font-semibold transition-opacity duration-300 hover:opacity-70'
+      <div className='border-t border-black/5 bg-body-secondary'>
+        <div className='w-full md:w-3/4 flex flex-col-reverse md:flex-row items-center justify-between gap-4 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] px-6 md:px-0 mx-auto'>
+          <div className='flex flex-col md:flex-row items-center gap-1 md:gap-3 text-center text-secondary-50 font-secondary text-sm'>
+            <span>
+              &copy; {new Date().getFullYear()} {CONFIG.APP_NAME}
+            </span>
+            <span className='hidden md:inline' aria-hidden='true'>
+              ·
+            </span>
+            <span>
+              Desarrollado por{' '}
+              <a
+                href='https://johnfreddyrivera.netlify.app'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-primary font-semibold underline-offset-4 hover:underline'
+              >
+                John Rivera
+              </a>
+            </span>
+          </div>
+          <Button
+            as='a'
+            href='#inicio'
+            variant='secondary'
+            padding='py-2 ps-4 pe-3'
+            className='text-sm bg-white'
           >
-            John Rivera
-          </a>
-        </span>
+            Volver arriba
+            <Icon size={16}>
+              <path d='m5 12 7-7 7 7' />
+              <path d='M12 19V5' />
+            </Icon>
+          </Button>
+        </div>
       </div>
     </footer>
   );
