@@ -50,7 +50,7 @@ export const PRODUCTS: Item[] = [
    {
     id: 4,
     thumbnail:
-      'images/productos/ensalada2.jpg',
+      'images/productos/ensalada2.webp',
     name: 'Ensalada de Frutas 2',
     description: '16oz',
     price: 18000,
@@ -58,7 +58,7 @@ export const PRODUCTS: Item[] = [
    {
     id: 5,
     thumbnail:
-      'images/productos/ensalada1.jpg',
+      'images/productos/ensalada1.webp',
     name: 'Ensalada de Frutas 1',
     description: '14oz',
     price: 15000,
@@ -73,7 +73,7 @@ export const TOPPINGS: Item[] = [
   {
     id: 4,
     thumbnail:
-      'images/toppings/queso.png',
+      'images/toppings/queso.webp',
     name: 'Queso Rayado',
     price: 1500,
   },
@@ -88,7 +88,7 @@ export const TOPPINGS: Item[] = [
   {
     id: 7,
     thumbnail:
-      'images/toppings/oreo.png',
+      'images/toppings/oreo.webp',
     name: 'Oreo',
     price: 2500,
   },
@@ -96,21 +96,21 @@ export const TOPPINGS: Item[] = [
   {
     id: 12,
     thumbnail:
-      'images/toppings/m&m.png',
+      'images/toppings/m&m.webp',
     name: 'm&m',
     price: 1500,
   },
   {
     id: 13,
     thumbnail:
-      'images/toppings/chocoramo.png',
+      'images/toppings/chocoramo.webp',
     name: 'Chocoramo',
     price: 1200,
   },
   {
     id: 14,
     thumbnail:
-      'images/toppings/fresas.extra.png',
+      'images/toppings/fresas.extra.webp',
     name: 'Fresas Extra',
     price: 1800,
   },
@@ -118,21 +118,21 @@ export const TOPPINGS: Item[] = [
   {
     id: 16,
     thumbnail:
-    'images/toppings/nutella.png',
+    'images/toppings/nutella.webp',
     name: 'Nutella',
     price: 3000,
   },
   {
     id: 17,
     thumbnail:
-    'images/toppings/chips.png',
+    'images/toppings/chips.webp',
     name: 'Chips de Chocolate',
     price: 3000,
   },
   {
     id: 18,
     thumbnail:
-    'images/toppings/chocolate.blanco.png',
+    'images/toppings/chocolate.blanco.webp',
     name: 'Chocolate Blanco',
     price: 3000,
   },
