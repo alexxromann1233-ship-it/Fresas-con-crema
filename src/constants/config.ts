@@ -2,7 +2,9 @@
  * Configuraciones
  */
 export const CONFIG = {
-  SRC_LOGO: '/images/logo-fresas.png',
+  SRC_LOGO: '/images/logo-fresas-256.webp',
+  SRCSET_LOGO:
+    '/images/logo-fresas-128.webp 128w, /images/logo-fresas-192.webp 192w, /images/logo-fresas-256.webp 256w',
   APP_NAME: 'Fresas con Crema',
   DESCRIPTION:
     'Las mejores fresas con crema y ensaladas de frutas de Cartago. Frescura y calidad en cada bocado, con toppings irresistibles',
