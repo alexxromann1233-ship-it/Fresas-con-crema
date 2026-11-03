@@ -16,9 +16,9 @@ export const PRODUCTS: Item[] = [
   {
     id: 3,
     thumbnail:
-      'images/productos/fresas.webp',
+      'images/productos/fresas1.webp',
     name: 'Fresas 1',
-    description: '14oz',
+    description: '12oz',
     price: 15000,
   },
   {
@@ -26,16 +26,16 @@ export const PRODUCTS: Item[] = [
     thumbnail:
       'images/productos/fresas.webp',
     name: 'Fresas 2',
-    description: '16oz',
-    price: 20000,
+    description: '14oz',
+    price: 18000,
   },
   {
     id: 1,
     thumbnail:
       'images/productos/fresas.webp',
     name: 'Fresas 3',
-    description: '22oz',
-    price: 25000,
+    description: '16oz',
+    price: 21000,
   },
   
    {
@@ -43,16 +43,16 @@ export const PRODUCTS: Item[] = [
     thumbnail:
       'images/productos/ensalada2.webp',
     name: 'Ensalada de Frutas 2',
-    description: '16oz',
-    price: 18000,
+    description: '14oz',
+    price: 16000,
   },
    {
     id: 5,
     thumbnail:
       'images/productos/ensalada1.webp',
     name: 'Ensalada de Frutas 1',
-    description: '14oz',
-    price: 15000,
+    description: '16oz',
+    price: 18000,
   },
  
 ] as const;
@@ -66,7 +66,7 @@ export const TOPPINGS: Item[] = [
     thumbnail:
       'images/toppings/queso.webp',
     name: 'Queso Rayado',
-    price: 1500,
+    price: 0,
   },
  
   {
@@ -74,14 +74,14 @@ export const TOPPINGS: Item[] = [
     thumbnail:
       'images/toppings/barquillos.webp',
     name: 'Barquillos',
-    price: 1000,
+    price: 0,
   },
   {
     id: 7,
     thumbnail:
       'images/toppings/oreo.webp',
     name: 'Oreo',
-    price: 2500,
+    price: 0,
   },
   
   {
@@ -89,43 +89,37 @@ export const TOPPINGS: Item[] = [
     thumbnail:
       'images/toppings/m&m.webp',
     name: 'm&m',
-    price: 1500,
+    price: 3000,
   },
-  {
-    id: 13,
-    thumbnail:
-      'images/toppings/chocoramo.webp',
-    name: 'Chocoramo',
-    price: 1200,
-  },
+   
   {
     id: 14,
     thumbnail:
       'images/toppings/fresas.extra.webp',
     name: 'Fresas Extra',
-    price: 1800,
+    price: 3000,
   },
 
   {
     id: 16,
     thumbnail:
-    'images/toppings/nutella.webp',
-    name: 'Nutella',
-    price: 3000,
+    'images/toppings/nussmilh.webp',
+    name: 'Nuss Milh',
+    price: 0,
   },
   {
     id: 17,
     thumbnail:
     'images/toppings/chips.webp',
     name: 'Chips de Chocolate',
-    price: 3000,
+    price: 0,
   },
   {
     id: 18,
     thumbnail:
     'images/toppings/chocolate.blanco.webp',
     name: 'Chocolate Blanco',
-    price: 3000,
+    price: 0,
   },
 ] as const;
 

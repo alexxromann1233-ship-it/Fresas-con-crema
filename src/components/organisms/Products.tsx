@@ -181,7 +181,7 @@ export function Products() {
               </>
             }
             title='Toppings'
-            description='Agrega todos los que quieras y arma tu combinación favorita.'
+            description='Cada Topping adicional tiene un costo de $3000'
             items={TOPPINGS}
             direction={-1}
             itemWidth='w-36 md:w-44'
