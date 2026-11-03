@@ -43,16 +43,16 @@ export const PRODUCTS: Item[] = [
     thumbnail:
       'images/productos/ensalada2.webp',
     name: 'Ensalada de Frutas 2',
-    description: '14oz',
-    price: 16000,
+    description: '16oz',
+    price: 18000,
   },
    {
     id: 5,
     thumbnail:
       'images/productos/ensalada1.webp',
     name: 'Ensalada de Frutas 1',
-    description: '16oz',
-    price: 18000,
+    description: '14oz',
+    price: 16000,
   },
  
 ] as const;
@@ -119,6 +119,13 @@ export const TOPPINGS: Item[] = [
     thumbnail:
     'images/toppings/chocolate.blanco.webp',
     name: 'Chocolate Blanco',
+    price: 0,
+  },
+  {
+    id: 19,
+    thumbnail:
+    'images/toppings/heladofresa.webp',
+    name: 'Helado de fresa',
     price: 0,
   },
 ] as const;

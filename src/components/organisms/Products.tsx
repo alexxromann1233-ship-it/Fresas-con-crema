@@ -181,7 +181,8 @@ export function Products() {
               </>
             }
             title='Toppings'
-            description='Cada Topping adicional tiene un costo de $3000'
+            description='Vaso 12oz 2 toppings - 14oz 2 toppings y helado - 16oz 3 toppings y helado.
+             Cada Topping adicional tiene un costo de $3000'
             items={TOPPINGS}
             direction={-1}
             itemWidth='w-36 md:w-44'
